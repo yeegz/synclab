@@ -274,7 +274,8 @@ public class SimNetwork internal constructor(private val sim: Simulation) {
                         !sim.nodeUp(from) -> "$from crashed before delivery"
                         else -> "link cut while in flight"
                     }
-                    sim.record(EventKind.DROP, to, from, id, FaultType.PARTITION.takeIf { sim.nodeUp(to) && sim.nodeUp(from) } ?: FaultType.CRASH, reason)
+                    // DROP events are always recorded sender -> receiver.
+                    sim.record(EventKind.DROP, from, to, id, FaultType.PARTITION.takeIf { sim.nodeUp(to) && sim.nodeUp(from) } ?: FaultType.CRASH, reason)
                 } else {
                     arrive(delivered)
                 }
@@ -363,7 +364,7 @@ public class SimNetwork internal constructor(private val sim: Simulation) {
         transmit(MessageKind.ONE_WAY, id, from, to, null, message, fate, c) { payload ->
             val handlers = listeners[to]
             if (handlers.isNullOrEmpty()) {
-                sim.record(EventKind.DROP, to, from, id, null, "no onMessage handler on $to")
+                sim.record(EventKind.DROP, from, to, id, null, "no onMessage handler on $to")
                 return@transmit
             }
             sim.record(EventKind.DELIVER, to, from, id, null, "received")

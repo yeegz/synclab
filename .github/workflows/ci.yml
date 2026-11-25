@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  jvm-js:
+    name: JVM + JS tests, API check, docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Test (JVM + JS) and check public API
+        run: ./gradlew check apiCheck -Psynclab.native=false
+      - name: API reference (Dokka)
+        run: ./gradlew :dokkaGenerate -Psynclab.native=false
+      - name: Upload SyncLab reports
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with: { name: synclab-reports, path: "**/build/synclab-reports/" }
+
+  native:
+    name: Kotlin/Native (macOS, iOS)
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Native tests (macOS arm64, iOS simulator arm64) and Linux compile
+        run: ./gradlew macosArm64Test iosSimulatorArm64Test compileKotlinLinuxX64
+
+  mutation:
+    name: Mutation testing (core guarantees)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew compileTestKotlinJvm compileTestKotlin -Psynclab.native=false
+      - run: python3 tools/mutation_test.py

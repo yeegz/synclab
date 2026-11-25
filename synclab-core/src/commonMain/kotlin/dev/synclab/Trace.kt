@@ -81,7 +81,7 @@ public class TraceEvent(
     }
 
     private companion object {
-        val arrowKindsOut = setOf(EventKind.SEND, EventKind.DUPLICATE, EventKind.FAIL, EventKind.UNREACHABLE, EventKind.TIMEOUT)
+        val arrowKindsOut = setOf(EventKind.SEND, EventKind.DROP, EventKind.DUPLICATE, EventKind.FAIL, EventKind.UNREACHABLE, EventKind.TIMEOUT)
     }
 }
 

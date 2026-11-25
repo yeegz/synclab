@@ -344,7 +344,11 @@ public class Simulation internal constructor(
             "Still not true ${config.settleTimeout} after the network was healed."
         }
         fail(Violation(ViolationKind.NOT_CONVERGED, pending.joinToString(", ") { it.first },
-            why + pending.joinToString("") { (n, d) -> if (d.isBlank()) "" else "\n$n:\n$d" }, nowMillis))
+            why + if (pending.size == 1) {
+                pending.single().second.let { d -> if (d.isBlank()) "" else "\n" + d.trimIndent().prependIndent("  ") }
+            } else {
+                pending.joinToString("") { (n, d) -> if (d.isBlank()) "" else "\n$n:\n$d" }
+            }, nowMillis))
     }
 
     private fun startChaos(): Job? {
