@@ -49,3 +49,9 @@ SyncLab bug that SyncLab can reproduce is the nicest kind of bug.
 
 Be kind and assume good intent. Maintainers may remove comments or contributors that make the
 project unwelcoming.
+
+## Where to start
+
+See [docs/GOOD-FIRST-ISSUES.md](docs/GOOD-FIRST-ISSUES.md). Extension points that need no core changes:
+custom fault types (`network.intercept`), listeners (`SimulationListener`), adapters (any module that
+calls `rpc`/`send` from a `NodeScope`), and examples.

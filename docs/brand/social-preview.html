@@ -1,0 +1,55 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face { font-family: "Atkinson Next"; src: url(fonts/Atkinson-Hyperlegible-Next.woff2); font-weight: 200 800; }
+@font-face { font-family: "Atkinson Mono"; src: url(fonts/Atkinson-Hyperlegible-Mono.woff2); font-weight: 200 800; }
+html, body { margin: 0; width: 1280px; height: 640px; overflow: hidden; }
+body { font-family: "Atkinson Next"; color: #edf0ee;
+  background: radial-gradient(760px 420px at 6% -10%, rgba(255,110,90,.20), transparent 62%),
+              radial-gradient(820px 520px at 100% 100%, rgba(67,211,166,.16), transparent 60%), #0b0c0f; }
+.left { position: absolute; left: 84px; top: 92px; width: 520px; }
+.brand { display: flex; align-items: center; gap: 22px; }
+.brand img { width: 92px; height: 92px; border-radius: 22px; box-shadow: 0 18px 40px -14px rgba(0,0,0,.9); }
+h1 { font-size: 84px; line-height: 1; margin: 0; letter-spacing: -.02em; }
+p.tag { font-size: 34px; line-height: 1.28; margin: 44px 0 0; color: #edf0ee; }
+p.tag b { color: #43d3a6; font-weight: 700; }
+p.sub { font-size: 22px; color: #a3aba7; margin: 26px 0 0; }
+.card { position: absolute; right: 70px; top: 70px; width: 560px; height: 500px; border-radius: 26px;
+  background: linear-gradient(180deg, #161a1c, #111416); box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 30px 70px -30px rgba(0,0,0,.95); overflow: hidden; }
+.lanes { position: absolute; inset: 26px 26px 92px; }
+.lane { position: absolute; top: 0; bottom: 0; width: 150px; }
+.lane h4 { margin: 0 0 18px; font-size: 19px; color: #a3aba7; font-weight: 700; }
+.ev { position: absolute; left: 0; width: 146px; border-radius: 12px; padding: 10px 12px; font-size: 16px; line-height: 1.3;
+  background: #1b2022; box-shadow: inset 0 1px 0 rgba(255,255,255,.05); }
+.ev b { display: block; font-size: 17px; }
+.ev.sel { background: linear-gradient(rgba(67,211,166,.14), rgba(67,211,166,.14)), #151a1b; box-shadow: 0 0 0 2px rgba(67,211,166,.7); }
+.ev.lost { background: linear-gradient(rgba(242,182,90,.16), rgba(242,182,90,.16)), #1b2022; }
+.ev.lost b { color: #f2b65a; }
+.ev.bad { background: linear-gradient(rgba(255,139,123,.16), rgba(255,139,123,.16)), #1b2022; }
+.ev.bad b { color: #ff8b7b; }
+svg.relay { position: absolute; inset: 0; overflow: visible; }
+.replay { position: absolute; left: 26px; right: 26px; bottom: 24px; height: 48px; border-radius: 12px; background: rgba(237,240,238,.05);
+  font-family: "Atkinson Mono"; font-size: 17px; color: #cfd6d3; display: flex; align-items: center; padding: 0 16px; white-space: nowrap; }
+.replay span { color: #43d3a6; }
+</style></head><body>
+<div class="left">
+  <div class="brand"><img src="icon.png" alt=""><h1>SyncLab</h1></div>
+  <p class="tag">Find the sync bugs that only happen when a reply is <b>lost</b>, <b>doubled</b> or <b>late</b>.</p>
+  <p class="sub">Deterministic simulation testing for Kotlin Multiplatform apps</p>
+</div>
+<div class="card">
+  <div class="lanes">
+    <div class="lane" style="left:0"><h4>phone</h4>
+      <div class="ev sel" style="top:46px"><b>sent #26</b>add expense 43.75</div>
+      <div class="ev" style="top:250px"><b>timed out</b>retrying #26</div></div>
+    <div class="lane" style="left:184px"><h4>server</h4>
+      <div class="ev sel" style="top:118px"><b>received #26</b>applied</div>
+      <div class="ev lost" style="top:184px"><b>reply lost</b>response loss</div>
+      <div class="ev bad" style="top:318px"><b>counted twice</b>balances off by 43.75</div></div>
+    <div class="lane" style="left:362px"><h4>laptop</h4>
+      <div class="ev" style="top:150px"><b>synced</b>cursor 14</div></div>
+    <svg class="relay" width="508" height="380"><path d="M150 72 C 170 72, 170 144, 184 144" fill="none" stroke="#43d3a6" stroke-width="3" stroke-linecap="round"/>
+      <path d="M184 208 C 120 208, 160 276, 150 276" fill="none" stroke="#43d3a6" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 7"/>
+      <circle cx="184" cy="144" r="5" fill="#43d3a6"/><circle cx="150" cy="276" r="5" fill="#43d3a6"/></svg>
+  </div>
+  <div class="replay"><span>SYNCLAB_REPLAY</span>=SL1:3:-:52ddc57d ./gradlew test</div>
+</div>
+</body></html>

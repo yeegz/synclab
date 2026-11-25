@@ -169,7 +169,7 @@ svg.relay .drawn { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); 
 <main>
   <div class="brand" aria-hidden="true">
     <svg viewBox="0 0 32 32"><rect x="3" y="4" width="4" height="24" rx="2" fill="currentColor" opacity=".35"/><rect x="25" y="4" width="4" height="24" rx="2" fill="currentColor" opacity=".35"/>
-      <path d="M7 10 C 16 10, 16 22, 25 22" style="stroke: var(--jade)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="25" cy="22" r="3" style="fill: var(--jade)"/></svg>
+      <path d="M10 9.5 C 15 9.5, 16 22.5, 21 22.5" style="stroke: var(--jade)" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="10" cy="9.5" r="1.6" style="fill: var(--jade)"/><circle cx="21" cy="22.5" r="2.6" style="fill: var(--jade)"/></svg>
     SyncLab
   </div>
   <header class="hero">

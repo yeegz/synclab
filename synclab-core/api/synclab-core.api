@@ -1,0 +1,501 @@
+public final class dev/synclab/Chaos {
+	public static final field Companion Ldev/synclab/Chaos$Companion;
+	public synthetic fun <init> (Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCrashEvery ()Lkotlin/ranges/ClosedRange;
+	public final fun getCrashFor ()Lkotlin/ranges/ClosedRange;
+	public final fun getDisconnectEvery ()Lkotlin/ranges/ClosedRange;
+	public final fun getDisconnectFor ()Lkotlin/ranges/ClosedRange;
+}
+
+public final class dev/synclab/Chaos$Builder {
+	public final fun crashes (Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;)V
+	public static synthetic fun crashes$default (Ldev/synclab/Chaos$Builder;Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;ILjava/lang/Object;)V
+	public final fun disconnects (Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;)V
+	public static synthetic fun disconnects$default (Ldev/synclab/Chaos$Builder;Lkotlin/ranges/ClosedRange;Lkotlin/ranges/ClosedRange;ILjava/lang/Object;)V
+}
+
+public final class dev/synclab/Chaos$Companion {
+	public final fun getNone ()Ldev/synclab/Chaos;
+}
+
+public final class dev/synclab/ConfigKt {
+	public static final fun NetworkConditions (Lkotlin/jvm/functions/Function1;)Ldev/synclab/NetworkConditions;
+	public static final fun SimConfig (Lkotlin/jvm/functions/Function1;)Ldev/synclab/SimConfig;
+	public static synthetic fun SimConfig$default (Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ldev/synclab/SimConfig;
+}
+
+public final class dev/synclab/DurableStorage {
+	public final fun get (Ljava/lang/String;)Ljava/lang/Object;
+	public final fun getKeys ()Ljava/util/Set;
+	public final fun getOrPut (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)Ljava/lang/Object;
+	public final fun remove (Ljava/lang/String;)V
+	public final fun set (Ljava/lang/String;Ljava/lang/Object;)V
+}
+
+public final class dev/synclab/EventKind : java/lang/Enum {
+	public static final field CLOCK Ldev/synclab/EventKind;
+	public static final field CRASH Ldev/synclab/EventKind;
+	public static final field DELIVER Ldev/synclab/EventKind;
+	public static final field DISCONNECT Ldev/synclab/EventKind;
+	public static final field DROP Ldev/synclab/EventKind;
+	public static final field DUPLICATE Ldev/synclab/EventKind;
+	public static final field FAIL Ldev/synclab/EventKind;
+	public static final field HANDLER_ERROR Ldev/synclab/EventKind;
+	public static final field HEAL Ldev/synclab/EventKind;
+	public static final field NOTE Ldev/synclab/EventKind;
+	public static final field OP_END Ldev/synclab/EventKind;
+	public static final field OP_FAILED Ldev/synclab/EventKind;
+	public static final field OP_START Ldev/synclab/EventKind;
+	public static final field PARTITION Ldev/synclab/EventKind;
+	public static final field RECONNECT Ldev/synclab/EventKind;
+	public static final field REPLY Ldev/synclab/EventKind;
+	public static final field RESTART Ldev/synclab/EventKind;
+	public static final field SEND Ldev/synclab/EventKind;
+	public static final field SETTLE Ldev/synclab/EventKind;
+	public static final field SUPPRESSED Ldev/synclab/EventKind;
+	public static final field TIMEOUT Ldev/synclab/EventKind;
+	public static final field UNREACHABLE Ldev/synclab/EventKind;
+	public static final field VIOLATION Ldev/synclab/EventKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/synclab/EventKind;
+	public static fun values ()[Ldev/synclab/EventKind;
+}
+
+public final class dev/synclab/ExploreResult {
+	public final fun getFaultCoverage ()Ljava/util/Map;
+	public final fun getRuns ()I
+	public final fun getSeeds ()Lkotlin/ranges/LongRange;
+	public final fun getTotalSteps ()J
+	public final fun getTotalVirtualMillis ()J
+	public final fun getWallMillis ()J
+}
+
+public final class dev/synclab/FailureReport {
+	public fun <init> (Ldev/synclab/Violation;JLjava/util/Set;Ljava/util/Set;ZLjava/util/List;JLdev/synclab/RunStats;Ljava/lang/String;Ljava/lang/String;ILjava/util/List;)V
+	public synthetic fun <init> (Ldev/synclab/Violation;JLjava/util/Set;Ljava/util/Set;ZLjava/util/List;JLdev/synclab/RunStats;Ljava/lang/String;Ljava/lang/String;ILjava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getDisabledFaults ()Ljava/util/Set;
+	public final fun getDroppedEvents ()J
+	public final fun getFaultsInvolved ()Ljava/util/Set;
+	public final fun getMinimised ()Z
+	public final fun getNotes ()Ljava/util/List;
+	public final fun getReplayToken ()Ljava/lang/String;
+	public final fun getRunsBeforeFailure ()I
+	public final fun getSeed ()J
+	public final fun getStats ()Ldev/synclab/RunStats;
+	public final fun getTestName ()Ljava/lang/String;
+	public final fun getTrace ()Ljava/util/List;
+	public final fun getViolation ()Ldev/synclab/Violation;
+	public final fun render (I)Ljava/lang/String;
+	public static synthetic fun render$default (Ldev/synclab/FailureReport;IILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class dev/synclab/FaultType {
+	public static final field Companion Ldev/synclab/FaultType$Companion;
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/synclab/FaultType$Companion {
+	public final fun getBuiltIn ()Ljava/util/List;
+	public final fun getCLOCK_SKEW ()Ldev/synclab/FaultType;
+	public final fun getCRASH ()Ldev/synclab/FaultType;
+	public final fun getDELAY ()Ldev/synclab/FaultType;
+	public final fun getDROP ()Ldev/synclab/FaultType;
+	public final fun getDUPLICATE ()Ldev/synclab/FaultType;
+	public final fun getINTERLEAVING ()Ldev/synclab/FaultType;
+	public final fun getPARTITION ()Ldev/synclab/FaultType;
+	public final fun getREORDER ()Ldev/synclab/FaultType;
+	public final fun getREQUEST_FAILURE ()Ldev/synclab/FaultType;
+	public final fun getRESPONSE_LOSS ()Ldev/synclab/FaultType;
+}
+
+public final class dev/synclab/GenKt {
+	public static final fun chance (Lkotlin/random/Random;D)Z
+	public static final fun duration (Lkotlin/random/Random;Lkotlin/ranges/ClosedRange;)J
+	public static final fun nextId (Lkotlin/random/Random;Ljava/lang/String;)Ljava/lang/String;
+	public static synthetic fun nextId$default (Lkotlin/random/Random;Ljava/lang/String;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun pick (Lkotlin/random/Random;Ljava/util/List;)Ljava/lang/Object;
+	public static final fun pick (Lkotlin/random/Random;[Ljava/lang/Object;)Ljava/lang/Object;
+	public static final fun weighted (Lkotlin/random/Random;[Lkotlin/Pair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class dev/synclab/InterceptedMessage {
+	public fun <init> (JLdev/synclab/MessageKind;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun getFrom ()Ljava/lang/String;
+	public final fun getId ()J
+	public final fun getKind ()Ldev/synclab/MessageKind;
+	public final fun getPayload ()Ljava/lang/Object;
+	public final fun getService ()Ljava/lang/String;
+	public final fun getTo ()Ljava/lang/String;
+}
+
+public abstract interface class dev/synclab/MessageInterceptor {
+	public abstract fun intercept (Ldev/synclab/InterceptedMessage;Lkotlin/random/Random;)Ldev/synclab/Verdict;
+}
+
+public final class dev/synclab/MessageKind : java/lang/Enum {
+	public static final field ONE_WAY Ldev/synclab/MessageKind;
+	public static final field REQUEST Ldev/synclab/MessageKind;
+	public static final field RESPONSE Ldev/synclab/MessageKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/synclab/MessageKind;
+	public static fun values ()[Ldev/synclab/MessageKind;
+}
+
+public final class dev/synclab/NetworkConditions {
+	public static final field Companion Ldev/synclab/NetworkConditions$Companion;
+	public final fun copy (Lkotlin/jvm/functions/Function1;)Ldev/synclab/NetworkConditions;
+	public final fun getDelaySpike-UwyO8pc ()J
+	public final fun getDelaySpikeRate ()D
+	public final fun getDropRate ()D
+	public final fun getDuplicateRate ()D
+	public final fun getLatency ()Lkotlin/ranges/ClosedRange;
+	public final fun getReorder ()Z
+	public final fun getRequestFailureRate ()D
+	public final fun getRequestTimeout-UwyO8pc ()J
+	public final fun getResponseLossRate ()D
+	public final fun getUnreachableDelay-UwyO8pc ()J
+	public final fun toBuilder ()Ldev/synclab/NetworkConditions$Builder;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/synclab/NetworkConditions$Builder {
+	public final fun getDelaySpike-UwyO8pc ()J
+	public final fun getDelaySpikeRate ()D
+	public final fun getDropRate ()D
+	public final fun getDuplicateRate ()D
+	public final fun getLatency ()Lkotlin/ranges/ClosedRange;
+	public final fun getReorder ()Z
+	public final fun getRequestFailureRate ()D
+	public final fun getRequestTimeout-UwyO8pc ()J
+	public final fun getResponseLossRate ()D
+	public final fun getUnreachableDelay-UwyO8pc ()J
+	public final fun setDelaySpike-LRDsOJo (J)V
+	public final fun setDelaySpikeRate (D)V
+	public final fun setDropRate (D)V
+	public final fun setDuplicateRate (D)V
+	public final fun setLatency (Lkotlin/ranges/ClosedRange;)V
+	public final fun setReorder (Z)V
+	public final fun setRequestFailureRate (D)V
+	public final fun setRequestTimeout-LRDsOJo (J)V
+	public final fun setResponseLossRate (D)V
+	public final fun setUnreachableDelay-LRDsOJo (J)V
+}
+
+public final class dev/synclab/NetworkConditions$Companion {
+	public final fun getFlaky ()Ldev/synclab/NetworkConditions;
+	public final fun getHostile ()Ldev/synclab/NetworkConditions;
+	public final fun getPerfect ()Ldev/synclab/NetworkConditions;
+}
+
+public final class dev/synclab/NodeDownException : java/lang/IllegalStateException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun getNode ()Ljava/lang/String;
+}
+
+public final class dev/synclab/NodeScope : kotlinx/coroutines/CoroutineScope {
+	public static final field Companion Ldev/synclab/NodeScope$Companion;
+	public static final field DEFAULT_SERVICE Ljava/lang/String;
+	public final fun every-NqJ4yvY (JJLkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/Job;
+	public static synthetic fun every-NqJ4yvY$default (Ldev/synclab/NodeScope;JJLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/Job;
+	public final fun getClock ()Ldev/synclab/SimClock;
+	public fun getCoroutineContext ()Lkotlin/coroutines/CoroutineContext;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNode ()Ldev/synclab/SimNode;
+	public final fun getRandom ()Lkotlin/random/Random;
+	public final fun getStorage ()Ldev/synclab/DurableStorage;
+	public final fun onMessage (Lkotlin/jvm/functions/Function3;)V
+	public final fun rpc-moChb0s (Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Duration;)Ldev/synclab/RpcClient;
+	public static synthetic fun rpc-moChb0s$default (Ldev/synclab/NodeScope;Ljava/lang/String;Ljava/lang/String;Lkotlin/time/Duration;ILjava/lang/Object;)Ldev/synclab/RpcClient;
+	public final fun send (Ljava/lang/String;Ljava/lang/Object;)V
+	public final fun serve (Ljava/lang/String;Lkotlin/jvm/functions/Function3;)V
+	public static synthetic fun serve$default (Ldev/synclab/NodeScope;Ljava/lang/String;Lkotlin/jvm/functions/Function3;ILjava/lang/Object;)V
+}
+
+public final class dev/synclab/NodeScope$Companion {
+}
+
+public final class dev/synclab/ReplayToken {
+	public static final field Companion Ldev/synclab/ReplayToken$Companion;
+	public fun <init> (JLjava/util/Set;Ljava/lang/Long;)V
+	public final fun getDisabledFaults ()Ljava/util/Set;
+	public final fun getFingerprint ()Ljava/lang/Long;
+	public final fun getSeed ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class dev/synclab/ReplayToken$Companion {
+	public final fun parse (Ljava/lang/String;)Ldev/synclab/ReplayToken;
+}
+
+public final class dev/synclab/RpcClient {
+	public final fun getFrom ()Ljava/lang/String;
+	public final fun getService ()Ljava/lang/String;
+	public final fun getTo ()Ljava/lang/String;
+	public final fun invoke (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class dev/synclab/RunKt {
+	public static final fun explore (IJLdev/synclab/SimConfig;Lkotlin/jvm/functions/Function2;)Ldev/synclab/ExploreResult;
+	public static synthetic fun explore$default (IJLdev/synclab/SimConfig;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Ldev/synclab/ExploreResult;
+	public static final fun simulate (JLdev/synclab/SimConfig;Ljava/lang/String;Lkotlin/jvm/functions/Function2;)Ldev/synclab/SimulationResult;
+	public static synthetic fun simulate$default (JLdev/synclab/SimConfig;Ljava/lang/String;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Ldev/synclab/SimulationResult;
+}
+
+public final class dev/synclab/RunStats {
+	public fun <init> (JJJJJJJ)V
+	public final fun getEvents ()J
+	public final fun getFingerprint ()J
+	public final fun getMessages ()J
+	public final fun getSeed ()J
+	public final fun getSteps ()J
+	public final fun getVirtualMillis ()J
+	public final fun getWallMillis ()J
+}
+
+public final class dev/synclab/RunSummary {
+	public fun <init> (Ljava/lang/String;IZJJJJLdev/synclab/FailureReport;)V
+	public final fun getFailure ()Ldev/synclab/FailureReport;
+	public final fun getFirstSeed ()J
+	public final fun getPassed ()Z
+	public final fun getRuns ()I
+	public final fun getTestName ()Ljava/lang/String;
+	public final fun getTotalSteps ()J
+	public final fun getTotalVirtualMillis ()J
+	public final fun getWallMillis ()J
+}
+
+public final class dev/synclab/SimClock {
+	public static final field Companion Ldev/synclab/SimClock$Companion;
+	public static final field EPOCH_START J
+	public final fun getOffsetMillis ()J
+	public final fun jump-LRDsOJo (J)V
+	public final fun nowMillis ()J
+}
+
+public final class dev/synclab/SimClock$Companion {
+}
+
+public final class dev/synclab/SimConfig {
+	public static final field Companion Ldev/synclab/SimConfig$Companion;
+	public final fun copy (Lkotlin/jvm/functions/Function1;)Ldev/synclab/SimConfig;
+	public final fun getChaos ()Ldev/synclab/Chaos;
+	public final fun getClockSkew-UwyO8pc ()J
+	public final fun getDisabledFaults ()Ljava/util/Set;
+	public final fun getFailOnHandlerException ()Z
+	public final fun getMaxSteps ()J
+	public final fun getMaxVirtualTime-UwyO8pc ()J
+	public final fun getMaxWallTime-UwyO8pc ()J
+	public final fun getNetwork ()Ldev/synclab/NetworkConditions;
+	public final fun getSettleTimeout-UwyO8pc ()J
+	public final fun getTraceLimit ()I
+	public final fun getVerifyDeterminism ()Z
+	public final fun isEnabled (Ldev/synclab/FaultType;)Z
+	public final fun toBuilder ()Ldev/synclab/SimConfig$Builder;
+}
+
+public final class dev/synclab/SimConfig$Builder {
+	public final fun chaos (Lkotlin/jvm/functions/Function1;)V
+	public final fun disable ([Ldev/synclab/FaultType;)V
+	public final fun getChaos ()Ldev/synclab/Chaos;
+	public final fun getClockSkew-UwyO8pc ()J
+	public final fun getDisabledFaults ()Ljava/util/Set;
+	public final fun getFailOnHandlerException ()Z
+	public final fun getMaxSteps ()J
+	public final fun getMaxVirtualTime-UwyO8pc ()J
+	public final fun getMaxWallTime-UwyO8pc ()J
+	public final fun getNetwork ()Ldev/synclab/NetworkConditions;
+	public final fun getSettleTimeout-UwyO8pc ()J
+	public final fun getTraceLimit ()I
+	public final fun getVerifyDeterminism ()Z
+	public final fun network (Lkotlin/jvm/functions/Function1;)V
+	public final fun only ([Ldev/synclab/FaultType;)V
+	public final fun setChaos (Ldev/synclab/Chaos;)V
+	public final fun setClockSkew-LRDsOJo (J)V
+	public final fun setDisabledFaults (Ljava/util/Set;)V
+	public final fun setFailOnHandlerException (Z)V
+	public final fun setMaxSteps (J)V
+	public final fun setMaxVirtualTime-LRDsOJo (J)V
+	public final fun setMaxWallTime-LRDsOJo (J)V
+	public final fun setNetwork (Ldev/synclab/NetworkConditions;)V
+	public final fun setSettleTimeout-LRDsOJo (J)V
+	public final fun setTraceLimit (I)V
+	public final fun setVerifyDeterminism (Z)V
+}
+
+public final class dev/synclab/SimConfig$Companion {
+	public final fun getDefault ()Ldev/synclab/SimConfig;
+}
+
+public final class dev/synclab/SimNetwork {
+	public final fun disconnect (Ljava/lang/String;)V
+	public final fun getConditions ()Ldev/synclab/NetworkConditions;
+	public final fun getInFlight ()I
+	public final fun getMessagesSent ()J
+	public final fun heal ()V
+	public final fun intercept (Ldev/synclab/FaultType;Ldev/synclab/MessageInterceptor;)V
+	public final fun isReachable (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun link (Ljava/lang/String;Ljava/lang/String;Ldev/synclab/NetworkConditions;)V
+	public final fun linkBoth (Ljava/lang/String;Ljava/lang/String;Ldev/synclab/NetworkConditions;)V
+	public final fun partition ([Ljava/util/Collection;)V
+	public final fun reconnect (Ljava/lang/String;)V
+	public final fun setConditions (Ldev/synclab/NetworkConditions;)V
+}
+
+public final class dev/synclab/SimNode {
+	public final fun crash ()V
+	public final fun getApp ()Ljava/lang/Object;
+	public final fun getAppOrNull ()Ljava/lang/Object;
+	public final fun getClock ()Ldev/synclab/SimClock;
+	public final fun getCrashable ()Z
+	public final fun getDisconnectable ()Z
+	public final fun getName ()Ljava/lang/String;
+	public final fun getRandom ()Lkotlin/random/Random;
+	public final fun getRestarts ()I
+	public final fun getStorage ()Ldev/synclab/DurableStorage;
+	public final fun isUp ()Z
+	public final fun perform (Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun restart ()V
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class dev/synclab/SimulatedNetworkException : java/lang/RuntimeException {
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class dev/synclab/SimulatedNetworkException$Remote : dev/synclab/SimulatedNetworkException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+}
+
+public final class dev/synclab/SimulatedNetworkException$RequestFailed : dev/synclab/SimulatedNetworkException {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class dev/synclab/SimulatedNetworkException$Timeout : dev/synclab/SimulatedNetworkException {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class dev/synclab/SimulatedNetworkException$Unreachable : dev/synclab/SimulatedNetworkException {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class dev/synclab/Simulation {
+	public final fun after-VtjQ1oo (JLkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/Job;
+	public final fun always (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public final fun alwaysEqual (Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+	public final fun converges (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public static synthetic fun converges$default (Ldev/synclab/Simulation;Ljava/lang/String;Lkotlin/jvm/functions/Function0;ILjava/lang/Object;)V
+	public final fun eventually (Ljava/lang/String;Lkotlin/jvm/functions/Function0;)V
+	public final fun eventuallyEqual (Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;)V
+	public final fun getAllNodes ()Ljava/util/List;
+	public final fun getConfig ()Ldev/synclab/SimConfig;
+	public final fun getNetwork ()Ldev/synclab/SimNetwork;
+	public final fun getNow-UwyO8pc ()J
+	public final fun getRandom ()Lkotlin/random/Random;
+	public final fun getSeed ()J
+	public final fun node (Ljava/lang/String;ZZLkotlin/jvm/functions/Function1;)Ldev/synclab/SimNode;
+	public static synthetic fun node$default (Ldev/synclab/Simulation;Ljava/lang/String;ZZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ldev/synclab/SimNode;
+	public final fun note (Ljava/lang/String;)V
+	public final fun parallel ([Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun sleep-VtjQ1oo (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun step (Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun waitUntil-O4J4VbY (JJLkotlin/jvm/functions/Function0;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun waitUntil-O4J4VbY$default (Ldev/synclab/Simulation;JJLkotlin/jvm/functions/Function0;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class dev/synclab/SimulationFailure : java/lang/AssertionError {
+	public fun <init> (Ldev/synclab/FailureReport;)V
+	public final fun getReport ()Ldev/synclab/FailureReport;
+}
+
+public abstract interface class dev/synclab/SimulationListener {
+	public abstract fun onFinished (Ldev/synclab/RunSummary;)V
+}
+
+public final class dev/synclab/SimulationResult {
+	public final fun getFaultsSeen ()Ljava/util/Set;
+	public final fun getReplayToken ()Ljava/lang/String;
+	public final fun getStats ()Ldev/synclab/RunStats;
+	public final fun getTrace ()Ljava/util/List;
+}
+
+public final class dev/synclab/SyncLab {
+	public static final field INSTANCE Ldev/synclab/SyncLab;
+	public final fun addListener (Ldev/synclab/SimulationListener;)V
+	public final fun removeListener (Ldev/synclab/SimulationListener;)V
+}
+
+public final class dev/synclab/TraceEvent {
+	public fun <init> (JJLdev/synclab/EventKind;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Long;Ldev/synclab/FaultType;Ljava/lang/String;)V
+	public final fun canonical ()Ljava/lang/String;
+	public final fun formatLine ()Ljava/lang/String;
+	public final fun getDetail ()Ljava/lang/String;
+	public final fun getFault ()Ldev/synclab/FaultType;
+	public final fun getIndex ()J
+	public final fun getKind ()Ldev/synclab/EventKind;
+	public final fun getMessageId ()Ljava/lang/Long;
+	public final fun getNode ()Ljava/lang/String;
+	public final fun getPeer ()Ljava/lang/String;
+	public final fun getTimeMillis ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class dev/synclab/Verdict {
+}
+
+public final class dev/synclab/Verdict$Delay : dev/synclab/Verdict {
+	public synthetic fun <init> (JLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getExtra-UwyO8pc ()J
+}
+
+public final class dev/synclab/Verdict$Drop : dev/synclab/Verdict {
+	public static final field INSTANCE Ldev/synclab/Verdict$Drop;
+}
+
+public final class dev/synclab/Verdict$Duplicate : dev/synclab/Verdict {
+	public static final field INSTANCE Ldev/synclab/Verdict$Duplicate;
+}
+
+public final class dev/synclab/Verdict$Pass : dev/synclab/Verdict {
+	public static final field INSTANCE Ldev/synclab/Verdict$Pass;
+}
+
+public final class dev/synclab/Verdict$Replace : dev/synclab/Verdict {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun getPayload ()Ljava/lang/Object;
+}
+
+public final class dev/synclab/Violation {
+	public fun <init> (Ldev/synclab/ViolationKind;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ldev/synclab/ViolationKind;Ljava/lang/String;Ljava/lang/String;JLjava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAtMillis ()J
+	public final fun getCause ()Ljava/lang/Throwable;
+	public final fun getKind ()Ldev/synclab/ViolationKind;
+	public final fun getMessage ()Ljava/lang/String;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getNode ()Ljava/lang/String;
+}
+
+public final class dev/synclab/ViolationKind : java/lang/Enum {
+	public static final field ASSERTION Ldev/synclab/ViolationKind;
+	public static final field BUDGET Ldev/synclab/ViolationKind;
+	public static final field ESCAPED_DISPATCHER Ldev/synclab/ViolationKind;
+	public static final field INVARIANT Ldev/synclab/ViolationKind;
+	public static final field NONDETERMINISM Ldev/synclab/ViolationKind;
+	public static final field NOT_CONVERGED Ldev/synclab/ViolationKind;
+	public static final field STUCK Ldev/synclab/ViolationKind;
+	public static final field UNCAUGHT Ldev/synclab/ViolationKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Ldev/synclab/ViolationKind;
+	public static fun values ()[Ldev/synclab/ViolationKind;
+}
+
+public final class dev/synclab/internal/TestNameHolder {
+	public static final field INSTANCE Ldev/synclab/internal/TestNameHolder;
+	public final fun getCurrent ()Ljava/lang/ThreadLocal;
+}
+

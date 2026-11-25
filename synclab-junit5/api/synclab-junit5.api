@@ -1,0 +1,9 @@
+public final class dev/synclab/junit5/SyncLabExtension : org/junit/jupiter/api/extension/AfterEachCallback, org/junit/jupiter/api/extension/BeforeEachCallback {
+	public fun <init> ()V
+	public fun afterEach (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+	public fun beforeEach (Lorg/junit/jupiter/api/extension/ExtensionContext;)V
+}
+
+public abstract interface annotation class dev/synclab/junit5/SyncLabTest : java/lang/annotation/Annotation {
+}
+

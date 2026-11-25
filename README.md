@@ -1,6 +1,12 @@
+<p align="center"><img src="docs/brand/icon.png" width="96" alt="SyncLab"></p>
+
 # SyncLab
 
-**Deterministic simulation testing for app sync code, in Kotlin Multiplatform.**
+**Run your real Kotlin sync code through thousands of seeded failure schedules in virtual time, and get
+the smallest set of faults that breaks it plus a one-line replay.**
+
+For Android and Kotlin Multiplatform teams with an offline outbox, Ktor retries, or anything that must
+not be saved twice.
 
 Your offline-first app works on your desk. Then a phone loses its response after the server already
 applied the write, retries, and a shared bill gets counted twice. Or two devices disagree about the
@@ -12,6 +18,7 @@ invariants after every step, and when something breaks it gives you a short stor
 and one line to replay it exactly.
 
 ```kotlin
+// A sketch; the full, runnable version is examples/expense-ledger.
 @Test
 fun `ledger never double-counts`() = explore(runs = 200) {                // 200 seeds, each a different world
     val server = node("server") { LedgerServer().also { s -> serve<Push, Ack>("push") { _, req -> s.apply(req) } } }
@@ -42,7 +49,10 @@ SyncLab found a problem (seed 3, at t=72.18s of virtual time).
     SYNCLAB_REPLAY=SL1:3:DROP+DUPLICATE+REORDER:8f6654b3 ./gradlew test --tests "example.ledger.LedgerSyncTest"
 ```
 
-The full trace is also written to a self-contained HTML viewer, with one lane per device.
+The full trace is also written to a self-contained HTML viewer with one lane per device. Select a
+message to see its journey: here, a push from `alice` reached the server, and the reply was lost.
+
+![SyncLab report viewer: a message's journey drawn across device lanes](docs/images/report-relay-lanes.jpg)
 
 ## What it simulates
 
@@ -80,7 +90,7 @@ dependencies {
 **[Quick start (5 minutes)](docs/QUICKSTART.md)** · [What it can and cannot find](docs/CAPABILITIES.md) ·
 [Adopting it in an existing app](docs/ADOPTING.md) · [Extending](docs/EXTENDING.md) · [Architecture](docs/ARCHITECTURE.md) ·
 [CI](docs/CI.md) · [Benchmarks](docs/BENCHMARKS.md) · [Compatibility](docs/COMPATIBILITY.md) · [Versioning](docs/VERSIONING.md) ·
-[Specification](docs/SPEC.md) · [Research](docs/research/RESEARCH.md) · [Roadmap](ROADMAP.md)
+[Specification](docs/SPEC.md) · [Design](docs/DESIGN.md) · [Research](docs/research/RESEARCH.md) · [Roadmap](ROADMAP.md) · [Hand-off](docs/HANDOFF.md)
 
 ## Examples
 
