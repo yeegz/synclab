@@ -43,6 +43,7 @@ public class Simulation internal constructor(
 
     private val nodes = LinkedHashMap<String, SimNode<*>>()
     private val always = ArrayList<Pair<String, () -> Boolean>>()
+    private val alwaysDetail = HashMap<String, () -> String>()
     private val eventually = ArrayList<Pair<String, () -> Boolean>>()
     private val eventuallyDetail = HashMap<String, () -> String>()
 
@@ -96,6 +97,15 @@ public class Simulation internal constructor(
      */
     public fun always(name: String, check: () -> Boolean) {
         always += name to check
+    }
+
+    /**
+     * Like [always], but compares two values after every step and shows both when they differ.
+     * Ideal for "cached aggregate equals recomputed value" style invariants.
+     */
+    public fun <V> alwaysEqual(name: String, expected: () -> V, actual: () -> V) {
+        always += name to { expected() == actual() }
+        alwaysDetail[name] = { "expected: ${describe(expected(), 300)}\nactual:   ${describe(actual(), 300)}" }
     }
 
     /**
@@ -212,7 +222,8 @@ public class Simulation internal constructor(
                 return
             }
             if (!result) {
-                fail(Violation(ViolationKind.INVARIANT, name, "Returned false after event #${recorder.total - 1}.", nowMillis))
+                val detail = alwaysDetail[name]?.let { d -> runCatching(d).getOrNull() }
+                fail(Violation(ViolationKind.INVARIANT, name, detail ?: "Returned false right after event #${recorder.total - 1} (the last event below).", nowMillis))
                 return
             }
         }

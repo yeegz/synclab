@@ -76,7 +76,7 @@ public class FailureReport(
             appendLine("  Faults involved: none. This fails on a fault-free network too.")
         } else {
             val ids = faultsInvolved.joinToString(", ") { it.id }
-            appendLine(if (minimised) "  Needs only these faults: $ids" else "  Faults active in this run: $ids")
+            appendLine(if (minimised) "  Reproduces with only these fault types: $ids  (minimal for this seed: turning any one off hides it)" else "  Faults active in this run: $ids")
         }
         if (runsBeforeFailure > 0) appendLine("  ($runsBeforeFailure earlier seeds passed.)")
         notes.forEach { appendLine("  Note: $it") }
