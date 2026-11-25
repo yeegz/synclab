@@ -3,12 +3,13 @@
 # project (outside this repo) that depends only on the published artifacts.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-WORK="$(mktemp -d)"
+WORK="$(mktemp -d "${TMPDIR:-/tmp}/synclab-install.XXXXXX")"
+LOCAL_MAVEN="$WORK/maven"
 VERSION="$(grep '^VERSION_NAME=' "$ROOT/gradle.properties" | cut -d= -f2)"
 GROUP="$(grep '^GROUP=' "$ROOT/gradle.properties" | cut -d= -f2)"
 
-echo "Publishing $GROUP:*:$VERSION to mavenLocal..."
-(cd "$ROOT" && ./gradlew publishToMavenLocal -Psynclab.native="${SYNCLAB_NATIVE:-false}" -q)
+echo "Publishing $GROUP:*:$VERSION to an isolated local Maven repository..."
+(cd "$ROOT" && ./gradlew publishToMavenLocal -Dmaven.repo.local="$LOCAL_MAVEN" -Psynclab.native="${SYNCLAB_NATIVE:-false}" -q)
 
 echo "Creating a fresh project in $WORK"
 mkdir -p "$WORK/src/test/kotlin"
@@ -54,6 +55,10 @@ class FirstTest {
     @SyncLabTest fun `idempotent counter passes`() { explore(runs = 300) { counter(true) } }
 }
 KT
-(cd "$WORK" && ./gradlew test -q)
-test -n "$(ls "$WORK"/build/synclab-reports/failures/*.html 2>/dev/null)" || { echo "No HTML report was written"; exit 1; }
+(cd "$WORK" && ./gradlew test -Dmaven.repo.local="$LOCAL_MAVEN" -q)
+reports=("$WORK"/build/synclab-reports/failures/*.html)
+if [[ ! -s "${reports[0]}" ]]; then
+    echo "No HTML report was written"
+    exit 1
+fi
 echo "Fresh install OK: tests passed, report written to $WORK/build/synclab-reports/failures/"

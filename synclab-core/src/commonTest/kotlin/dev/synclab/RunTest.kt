@@ -70,6 +70,30 @@ class RunTest {
     }
 
     @Test
+    fun replayAppliesTheDisabledFaultsFromTheToken() {
+        val config = SimConfig {
+            network = NetworkConditions.Perfect
+            disable(FaultType.PARTITION)
+        }
+        val scenario: suspend Simulation.() -> Unit = {
+            node("phone") { }
+            node("server") { }
+            network.partition(listOf("phone"), listOf("server"))
+        }
+        val recorded = simulate(config = config, scenario = scenario)
+        val replayed = simulate(replay = recorded.replayToken, scenario = scenario)
+        assertTrue(replayed.trace.any { it.kind == EventKind.SUPPRESSED && it.fault == FaultType.PARTITION })
+        assertEquals(recorded.stats.fingerprint, replayed.stats.fingerprint)
+    }
+
+    @Test
+    fun traceFingerprintChangesWhenOnlyAnEventDetailChanges() {
+        val first = simulate(seed = 42) { note("sent three updates") }
+        val second = simulate(seed = 42) { note("sent four updates") }
+        assertNotEquals(first.stats.fingerprint, second.stats.fingerprint)
+    }
+
+    @Test
     fun sameSeedSameTrace() {
         val a = simulate(seed = 42) { naiveCounter(idempotent = true) }
         val b = simulate(seed = 42) { naiveCounter(idempotent = true) }

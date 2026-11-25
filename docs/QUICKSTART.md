@@ -79,7 +79,7 @@ What happens:
 ./gradlew test
 ```
 
-It fails within a few seeds:
+It fails within a few seeds (your seed, times and token may differ):
 
 ```
 SyncLab found a problem (seed 2, at t=3.36s of virtual time).
