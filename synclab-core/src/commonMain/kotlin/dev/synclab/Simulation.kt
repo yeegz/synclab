@@ -105,7 +105,7 @@ public class Simulation internal constructor(
      */
     public fun <V> alwaysEqual(name: String, expected: () -> V, actual: () -> V) {
         always += name to { expected() == actual() }
-        alwaysDetail[name] = { "expected: ${describe(expected(), 300)}\nactual:   ${describe(actual(), 300)}" }
+        alwaysDetail[name] = { explainMismatch(expected(), actual()) }
     }
 
     /**
@@ -122,7 +122,7 @@ public class Simulation internal constructor(
      */
     public fun <V> eventuallyEqual(name: String, expected: () -> V, actual: () -> V) {
         eventually += name to { expected() == actual() }
-        eventuallyDetail[name] = { "  expected: ${describe(expected(), 300)}\n  actual:   ${describe(actual(), 300)}" }
+        eventuallyDetail[name] = { explainMismatch(expected(), actual()).prependIndent("  ") }
     }
 
     /**
@@ -427,21 +427,30 @@ private fun explainDifferences(replicas: List<Pair<String, Any?>>): String {
     }.trimEnd()
 }
 
-private fun diff(a: Any?, b: Any?): String = when {
+private fun explainMismatch(expected: Any?, actual: Any?): String {
+    val structured = expected is Map<*, *> && actual is Map<*, *> || expected is Set<*> && actual is Set<*> || expected is List<*> && actual is List<*>
+    return if (structured) {
+        diff(expected, actual, "expected", "actual") + "\nexpected: ${describe(expected, 200)}\nactual:   ${describe(actual, 200)}"
+    } else {
+        "expected: ${describe(expected, 300)}\nactual:   ${describe(actual, 300)}"
+    }
+}
+
+private fun diff(a: Any?, b: Any?, first: String = "first", second: String = "second"): String = when {
     a is Map<*, *> && b is Map<*, *> -> buildString {
         val onlyA = a.keys - b.keys
         val onlyB = b.keys - a.keys
         val changed = a.keys.intersect(b.keys).filter { a[it] != b[it] }
-        if (onlyA.isNotEmpty()) appendLine("only in first: ${onlyA.take(5).joinToString { describe(it, 60) }}${more(onlyA.size)}")
-        if (onlyB.isNotEmpty()) appendLine("only in second: ${onlyB.take(5).joinToString { describe(it, 60) }}${more(onlyB.size)}")
+        if (onlyA.isNotEmpty()) appendLine("only in $first: ${onlyA.take(5).joinToString { describe(it, 60) }}${more(onlyA.size)}")
+        if (onlyB.isNotEmpty()) appendLine("only in $second: ${onlyB.take(5).joinToString { describe(it, 60) }}${more(onlyB.size)}")
         changed.take(5).forEach { k -> appendLine("${describe(k, 60)}: ${describe(a[k], 80)}  vs  ${describe(b[k], 80)}") }
         if (changed.size > 5) appendLine("…and ${changed.size - 5} more differing keys")
     }.trimEnd()
     a is Set<*> && b is Set<*> -> buildString {
         val onlyA = a - b
         val onlyB = b - a
-        if (onlyA.isNotEmpty()) appendLine("only in first: ${onlyA.take(5).joinToString { describe(it, 60) }}${more(onlyA.size)}")
-        if (onlyB.isNotEmpty()) appendLine("only in second: ${onlyB.take(5).joinToString { describe(it, 60) }}${more(onlyB.size)}")
+        if (onlyA.isNotEmpty()) appendLine("only in $first: ${onlyA.take(5).joinToString { describe(it, 60) }}${more(onlyA.size)}")
+        if (onlyB.isNotEmpty()) appendLine("only in $second: ${onlyB.take(5).joinToString { describe(it, 60) }}${more(onlyB.size)}")
     }.trimEnd()
     a is List<*> && b is List<*> -> {
         val i = a.indices.firstOrNull { it >= b.size || a[it] != b[it] } ?: a.size
