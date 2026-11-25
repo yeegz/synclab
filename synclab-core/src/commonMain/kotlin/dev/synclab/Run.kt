@@ -102,8 +102,9 @@ public fun explore(
         val seed = base + i
         val outcome = Runner.runOnce(seed, config, scenario)
         var failure = outcome.failure
-        // Check determinism once up front: a nondeterministic scenario makes every other report unreliable.
-        if (failure == null && i == 0 && config.verifyDeterminism) failure = Runner.checkDeterminism(seed, config, scenario, outcome)
+        // Re-run a sample of seeds (the first, then every 10th) to catch nondeterminism, which would
+        // make every other report unreliable. Sampling keeps the cost to about 10%.
+        if (failure == null && i % 10 == 0 && config.verifyDeterminism) failure = Runner.checkDeterminism(seed, config, scenario, outcome)
         steps += outcome.stats.steps
         virtual += outcome.stats.virtualMillis
         outcome.sim.recorder.faultsSeen.forEach { coverage[it] = (coverage[it] ?: 0) + 1 }

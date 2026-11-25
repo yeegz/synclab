@@ -147,7 +147,10 @@ public class SimConfig private constructor(b: Builder) {
     public val maxVirtualTime: Duration = b.maxVirtualTime
     public val maxSteps: Long = b.maxSteps
     public val maxWallTime: Duration = b.maxWallTime
-    /** Re-run with the same seed and compare traces to catch nondeterminism in the code under test. */
+    /**
+     * Re-run with the same seed and compare traces to catch nondeterminism in the code under test.
+     * `simulate` checks its single run; `explore` checks the first seed and every 10th seed.
+     */
     public val verifyDeterminism: Boolean = b.verifyDeterminism
     /** Fail the run when a `serve` handler throws (the caller also receives [SimulatedNetworkException.Remote]). */
     public val failOnHandlerException: Boolean = b.failOnHandlerException
